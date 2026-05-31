@@ -50,3 +50,23 @@ exports.createPost = async (
 
   res.status(201).json(post);
 };
+
+
+exports.updatePost = async (
+  req,
+  res
+) => {
+  const { title, content } = req.body;
+
+  const post = await prisma.post.update({
+    where: {
+      id: Number(req.params.id)
+    },
+    data: {
+      title,
+      content
+    }
+  });
+
+  res.json(post);
+};
