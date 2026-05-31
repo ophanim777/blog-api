@@ -86,3 +86,26 @@ exports.deletePost = async (
     message: "Post deleted"
   });
 };
+
+
+exports.togglePublish = async (
+  req,
+  res
+) => {
+  const post = await prisma.post.findUnique({
+    where: {
+      id: Number(req.params.id)
+    }
+  });
+const updatedPost =
+    await prisma.post.update({
+      where: {
+        id: Number(req.params.id)
+      },
+      data: {
+        published: !post.published
+      }
+    });
+
+  res.json(updatedPost);
+};
