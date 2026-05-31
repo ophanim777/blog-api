@@ -17,3 +17,19 @@ exports.createComment = async (
 
   res.status(201).json(comment);
 };
+
+
+exports.deleteComment = async (
+  req,
+  res
+) => {
+  await prisma.comment.delete({
+    where: {
+      id: Number(req.params.id)
+    }
+  });
+
+  res.json({
+    message: "Comment deleted"
+  });
+};
