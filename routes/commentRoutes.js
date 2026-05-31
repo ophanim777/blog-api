@@ -16,3 +16,18 @@ const {
 } = require(
   "../controllers/commentController"
 );
+
+router.post(
+  "/",
+  auth,
+  createComment
+);
+
+router.delete(
+  "/:id",
+  auth,
+  admin,
+  deleteComment
+);
+
+module.exports = router;
