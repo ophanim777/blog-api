@@ -32,3 +32,21 @@ exports.getPost = async (
 
   res.json(post);
 };
+
+
+exports.createPost = async (
+  req,
+  res
+) => {
+  const { title, content } = req.body;
+
+  const post = await prisma.post.create({
+    data: {
+      title,
+      content,
+      authorId: req.user.id
+    }
+  });
+
+  res.status(201).json(post);
+};
